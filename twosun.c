@@ -14,7 +14,24 @@
 typedef struct Node{
     int key;
     int value;
+    Node *next;
 } Node;
+
+typedef struct Htable{
+    Node **nodes;
+}Htable;
+
+Htable *create(void){
+    Htable *hashtable = malloc(sizeof(Htable) * 1);
+
+    hashtable->nodes = malloc(sizeof(Node *) * TABLE_SIZE);
+
+    for(int i=0; i<TABLE_SIZE; i++){
+        hashtable->nodes[i]=NULL;
+    }
+
+    return hashtable;
+}
 
 unsigned int hash(int* key){
     int hash_value;
