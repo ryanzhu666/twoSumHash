@@ -72,6 +72,16 @@ Node *createNode(int *key, int *indexs){
     return new;
 }
 
+int getIndex(Htable *ht, int *value){
+    unsigned int slot = hash(value);
+    Node *return_node = ht->nodes[slot];
+
+    if (return_node == NULL){
+        return NULL;
+    }
+    return return_node->indexs;
+}
+
 void main(){
     int p=3;
     printf("%d\n",hash(&p));
