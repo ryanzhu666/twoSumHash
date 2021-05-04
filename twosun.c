@@ -16,12 +16,14 @@ typedef struct Node{
     int value;
 } Node;
 
-unsigned int hash(int *key){
-    unsigned int hash_value;
-    hash_value = *key * *key % TABLE_SIZE;
+unsigned int hash(int* key){
+    int hash_value;
+    // int a = key;
+    hash_value = (unsigned int) *(key) * *(key) % TABLE_SIZE;
     return hash_value;
 }
 
 void main(){
-
+    int p=3;
+    printf("%d\n",hash(&p));
 }
