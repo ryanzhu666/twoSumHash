@@ -14,7 +14,7 @@
 typedef struct Node{
     int key;
     int value;
-    Node *next;
+    struct Node *next;
 } Node;
 
 typedef struct Htable{
@@ -40,7 +40,40 @@ unsigned int hash(int* key){
     return hash_value;
 }
 
+void insert(Htable *ht, const int *key, const int *value){
+    unsigned int slot = hash(key);
+    Node *new = ht->nodes[slot];
+
+    if (new == NULL){
+        ht->nodes[slot] = createNode(key,value);
+        return;
+    }
+
+    Node *prev;
+
+    while (new != NULL){
+        if(new->key == *(key)){
+            new->value = *(value);
+            return;
+        }
+        prev = new;
+        new = prev->next;
+    }
+
+    prev->next = createNode(key,value);
+}
+
+Node *createNode(int *key, int *value){
+    Node *new = malloc(sizeof(Node) *1);
+    new->key = *(key);
+    new->value = *(value);
+    new->next =NULL;
+
+    return new;
+}
+
 void main(){
     int p=3;
     printf("%d\n",hash(&p));
+    Htable *ht = create();
 }
