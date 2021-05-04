@@ -13,7 +13,7 @@
 
 typedef struct Node{
     int key;
-    int value;
+    int indexs;
     struct Node *next;
 } Node;
 
@@ -40,12 +40,12 @@ unsigned int hash(int* key){
     return hash_value;
 }
 
-void insert(Htable *ht, const int *key, const int *value){
+void insert(Htable *ht, const int *key, const int *indexs){
     unsigned int slot = hash(key);
     Node *new = ht->nodes[slot];
 
     if (new == NULL){
-        ht->nodes[slot] = createNode(key,value);
+        ht->nodes[slot] = createNode(key,indexs);
         return;
     }
 
@@ -53,20 +53,20 @@ void insert(Htable *ht, const int *key, const int *value){
 
     while (new != NULL){
         if(new->key == *(key)){
-            new->value = *(value);
+            new->indexs = *(indexs);
             return;
         }
         prev = new;
         new = prev->next;
     }
 
-    prev->next = createNode(key,value);
+    prev->next = createNode(key,indexs);
 }
 
-Node *createNode(int *key, int *value){
+Node *createNode(int *key, int *indexs){
     Node *new = malloc(sizeof(Node) *1);
     new->key = *(key);
-    new->value = *(value);
+    new->indexs = *(indexs);
     new->next =NULL;
 
     return new;
