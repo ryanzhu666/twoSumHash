@@ -100,7 +100,7 @@ int *getIndex(Htable *ht, int *value){
 }
 
 void main(){
-    int nums[4]={2,7,11,15};
+    int nums[4]={-2,7,-11,15};
     int target = 9;
     int size = sizeof(nums)/sizeof(nums[0]);
 
@@ -110,6 +110,6 @@ void main(){
         // printf("value is %d,index is %d\n",ht->nodes[hash(&nums[2])]->key,ht->nodes[hash(&nums[2])]->indexs);
         
     }
-    // printf("value is %d,index is %d\n",nums[2],*(getIndex(ht,&nums[2])));
+    printf("value is %d,index is %d\n",nums[2],*(getIndex(ht,&nums[2])));
     
 }
