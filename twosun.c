@@ -21,6 +21,8 @@ typedef struct Htable{
     Node **nodes;
 }Htable;
 
+Node *createNode(int *key, int *indexs);
+
 Htable *create(void){
     Htable *hashtable = malloc(sizeof(Htable) * 1);
 
@@ -72,14 +74,29 @@ Node *createNode(int *key, int *indexs){
     return new;
 }
 
-int getIndex(Htable *ht, int *value){
+int *getIndex(Htable *ht, int *value){
     unsigned int slot = hash(value);
     Node *return_node = ht->nodes[slot];
 
     if (return_node == NULL){
         return NULL;
     }
-    return return_node->indexs;
+
+    int arraysize=10,i=0;
+    int *re_array = malloc(sizeof(int)*arraysize);
+    while (return_node->next != NULL){
+        if(i<arraysize){
+            re_array = realloc(re_array,sizeof(int)*arraysize*2);
+            arraysize=arraysize*2;
+        }
+        re_array[i]=return_node->indexs;
+        i++;
+        return_node=return_node->next;
+    }
+    re_array[i]=return_node->indexs;
+    i++;
+
+    return re_array;
 }
 
 void main(){
