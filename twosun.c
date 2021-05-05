@@ -82,12 +82,12 @@ int *getIndex(Htable *ht, int *value){
         return NULL;
     }
 
-    int arraysize=10,i=0;
+    int arraysize=1,i=0;
     int *re_array = malloc(sizeof(int)*arraysize);
     while (return_node->next != NULL){
-        if(i<arraysize){
-            re_array = realloc(re_array,sizeof(int)*arraysize*2);
-            arraysize=arraysize*2;
+        if(i>=arraysize){
+            re_array = realloc(re_array,sizeof(int)*(arraysize+1));
+            arraysize=arraysize+1;
         }
         re_array[i]=return_node->indexs;
         i++;
@@ -100,7 +100,16 @@ int *getIndex(Htable *ht, int *value){
 }
 
 void main(){
-    int p=3;
-    printf("%d\n",hash(&p));
+    int nums[4]={2,7,11,15};
+    int target = 9;
+    int size = sizeof(nums)/sizeof(nums[0]);
+
     Htable *ht = create();
+    for (int i=0; i<size; i++){
+        insert(ht,&nums[i],&i);
+        // printf("value is %d,index is %d\n",ht->nodes[hash(&nums[2])]->key,ht->nodes[hash(&nums[2])]->indexs);
+        
+    }
+    // printf("value is %d,index is %d\n",nums[2],*(getIndex(ht,&nums[2])));
+    
 }
