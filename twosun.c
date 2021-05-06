@@ -38,7 +38,7 @@ Htable *create(void){
 unsigned int hash(int* key){
     int hash_value;
     // int a = key;
-    hash_value = (unsigned int) *(key) * *(key) % TABLE_SIZE;
+    hash_value = (unsigned int) *(key) * *(key)  % TABLE_SIZE;
     return hash_value;
 }
 
@@ -74,21 +74,22 @@ Node *createNode(int *key, int *indexs){
     return new;
 }
 
-int *getIndex(Htable *ht, int *value, int index){
+int getIndex(Htable *ht, int *value, int index){
     unsigned int slot = hash(value);
     Node *return_node = ht->nodes[slot];
+    int re_ind=-1;
 
     if (return_node == NULL){
-        return NULL;
+        return re_ind;
     }
 
     int arraysize=1,i=0;
-    int *re_ind = malloc(sizeof(int)*arraysize);
+    // = malloc(sizeof(int)*arraysize);
     //int *re_ind;
     //*re_ind=NULL;
     while (return_node->next!=NULL){
-        if ((return_node->indexs != index)&(return_node->key == *value)){
-            *re_ind=return_node->indexs;
+        if ((return_node->indexs > index) & (*value ==return_node->key)){
+            re_ind=return_node->indexs;
         }
         return_node=return_node->next;
         
@@ -106,8 +107,8 @@ int *getIndex(Htable *ht, int *value, int index){
         // i++;
         // return_node=return_node->next;
     }
-    if ((return_node->indexs != index)&(return_node->key == *value)){
-        *re_ind=return_node->indexs;
+    if ((return_node->indexs > index) & (*value ==return_node->key)){
+            re_ind=return_node->indexs;
     }
     // re_ind[i]=return_node->indexs;
     // i++;
@@ -117,8 +118,9 @@ int *getIndex(Htable *ht, int *value, int index){
 }
 
 void main(){
-    int nums[4]={-2,7,2,15};
-    int target = 9;
+    int nums[5]={0,3,-3,4,-1};//{2,7,11,5};
+    int target = -1;//9;
+
     int size = sizeof(nums)/sizeof(nums[0]);
 
     Htable *ht = create();
@@ -127,6 +129,18 @@ void main(){
         // printf("value is %d,index is %d\n",ht->nodes[hash(&nums[2])]->key,ht->nodes[hash(&nums[2])]->indexs);
         
     }
+    int numsSize=5;
+    int res[2];
     // printf("value is %d,index is %d\n",nums[0],*(getIndex(ht,&nums[0],2)));
+    for (int i=0; i<numsSize; i++){
+        int search_value = target-nums[i];
+        int re_ind = getIndex(ht,&search_value,i);
+        if (re_ind!=-1){
+            res[0]=i;
+            
+            res[1]=re_ind;
+        }
+    }
+    printf("first is %d, second is %d\n",res[0],res[1]);
     
 }
