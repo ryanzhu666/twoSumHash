@@ -42,7 +42,7 @@ unsigned int hash(int* key){
     return hash_value;
 }
 
-void insert(Htable *ht, const int *key, const int *indexs){
+void insert(Htable *ht, int *key, int *indexs){
     unsigned int slot = hash(key);
     Node *new = ht->nodes[slot];
 
@@ -74,7 +74,7 @@ Node *createNode(int *key, int *indexs){
     return new;
 }
 
-int *getIndex(Htable *ht, int *value){
+int *getIndex(Htable *ht, int *value, int index){
     unsigned int slot = hash(value);
     Node *return_node = ht->nodes[slot];
 
@@ -83,24 +83,41 @@ int *getIndex(Htable *ht, int *value){
     }
 
     int arraysize=1,i=0;
-    int *re_array = malloc(sizeof(int)*arraysize);
-    while (return_node->next != NULL){
-        if(i>=arraysize){
-            re_array = realloc(re_array,sizeof(int)*(arraysize+1));
-            arraysize=arraysize+1;
+    int *re_ind = malloc(sizeof(int)*arraysize);
+    //int *re_ind;
+    //*re_ind=NULL;
+    while (return_node->next!=NULL){
+        if ((return_node->indexs != index)&(return_node->key == *value)){
+            *re_ind=return_node->indexs;
         }
-        re_array[i]=return_node->indexs;
-        i++;
         return_node=return_node->next;
+        
+        // if(index!=*re_ind){
+            
+        // }
+        // else{
+        //     *re_ind=return_node->indexs;
+        // }
+        // if(i>=arraysize){
+        //     re_ind = realloc(re_ind,sizeof(int)*(arraysize+1));
+        //     arraysize=arraysize+1;
+        // }
+        // re_ind[i]=return_node->indexs;
+        // i++;
+        // return_node=return_node->next;
     }
-    re_array[i]=return_node->indexs;
-    i++;
+    if ((return_node->indexs != index)&(return_node->key == *value)){
+        *re_ind=return_node->indexs;
+    }
+    // re_ind[i]=return_node->indexs;
+    // i++;
+    
 
-    return re_array;
+    return re_ind;
 }
 
 void main(){
-    int nums[4]={-2,7,-11,15};
+    int nums[4]={-2,7,2,15};
     int target = 9;
     int size = sizeof(nums)/sizeof(nums[0]);
 
@@ -110,6 +127,6 @@ void main(){
         // printf("value is %d,index is %d\n",ht->nodes[hash(&nums[2])]->key,ht->nodes[hash(&nums[2])]->indexs);
         
     }
-    printf("value is %d,index is %d\n",nums[2],*(getIndex(ht,&nums[2])));
+    // printf("value is %d,index is %d\n",nums[0],*(getIndex(ht,&nums[0],2)));
     
 }
