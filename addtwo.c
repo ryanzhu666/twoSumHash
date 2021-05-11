@@ -41,8 +41,8 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     
     int carry =0;
     
-    l1_end = (l1->next ==NULL);
-    l2_end = (l2->next ==NULL);
+    l1_end = (l1 ==NULL);
+    l2_end = (l2 ==NULL);
     
     while((!l1_end) | (!l2_end)|(carry!=0)){
         struct ListNode *new = createNode(-1);
@@ -51,13 +51,13 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
         int temp_l2=0;
         if (!l1_end){
             temp_l1=l1->val;
-            l1_end = (l1->next ==NULL);
             l1=l1->next;
+            l1_end = (l1 ==NULL);
         }
         if(!l2_end){
             temp_l2=l2->val;
-            l2_end = (l2->next ==NULL);
             l2=l2->next;
+            l2_end = (l2 ==NULL);
         }
         int temp = temp_l1+temp_l2+carry;
         new->val = temp % 10;
