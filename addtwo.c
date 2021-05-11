@@ -92,11 +92,19 @@ void main(){
     // int num_b[5]={2,7,9,4,1};
 
     struct ListNode l1,l2,rl;
-    struct *new, *pre;
+    struct ListNode *new, *pre, *first;
     int size = sizeof(num_a[0]/sizeof(num_a));
-
+    
+    pre= malloc(sizeof(struct ListNode)); 
     for (i=0; i < size; i++){
-        new= createNode()
+        new= createNode(num_a[i]);
+        if(pre==NULL){
+            first = new;
+        }
+        else{
+            pre->next=new;
+        }
+        pre=new;
     }
     // addTwoNumbers(&l1,&l2);
 }          
