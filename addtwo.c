@@ -5,17 +5,24 @@
  *     struct ListNode *next;
  * };
  */
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <stdbool.h>
-// #include <assert.h>
-// #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <assert.h>
+#include <string.h>
 
 // typedef struct ListNode{
 //     int val;
 //     struct ListNode *next;
 // } ListNode;
 
+struct ListNode* createNode(int val){
+    struct ListNode *new = malloc(sizeof(struct ListNode) *1);
+    new->val = val;
+    new->next =NULL;
+
+    return new;
+}
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     // bool l1_end, l2_end;
@@ -79,4 +86,17 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     
     return return_l;
 }
-          
+
+void main(){
+    int num_a[5]={1,3,5,4,1};
+    // int num_b[5]={2,7,9,4,1};
+
+    struct ListNode l1,l2,rl;
+    struct *new, *pre;
+    int size = sizeof(num_a[0]/sizeof(num_a));
+
+    for (i=0; i < size; i++){
+        new= createNode()
+    }
+    // addTwoNumbers(&l1,&l2);
+}          
