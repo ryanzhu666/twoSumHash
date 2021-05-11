@@ -35,7 +35,7 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     // struct ListNode *return_l=&test;
     // struct listNode *current_pos = malloc(sizeof(struct ListNode)); 
     ListNode *current_pos = return_l;
-    ListNode *pre_pos = return_l;
+    // ListNode *pre_pos = return_l;
     // return_l=&test;
     // return_l->val = 2;
     
